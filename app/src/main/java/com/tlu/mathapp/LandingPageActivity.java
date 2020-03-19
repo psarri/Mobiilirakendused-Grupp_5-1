@@ -23,7 +23,7 @@ public class LandingPageActivity extends AppCompatActivity{
             }
         });
     }
-
+    // Start game
     public void startGame() {
         Intent intent = new Intent(this, Game.class);
         startActivity(intent);
