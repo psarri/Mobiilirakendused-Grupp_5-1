@@ -13,8 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="45sp"
-        android:text="@string/m2ngima"
-        />
+        android:text="mängime"
+        android:textSize="45sp" />
 
 </LinearLayout>
