@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Matemaatika</string>
+    <string name="m2ngima">Mängima</string>
+    <string name="calculation">2+2</string>
+    <string name="b1_answer">2</string>
+    <string name="b2_answer">2</string>
+    <string name="b3_answer">2</string>
+</resources>
