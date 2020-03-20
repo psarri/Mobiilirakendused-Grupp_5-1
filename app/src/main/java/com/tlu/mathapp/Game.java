@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Game extends AppCompatActivity {
-    private int gameLevel = 5; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
+    private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
 
     @Override
@@ -31,30 +31,34 @@ public class Game extends AppCompatActivity {
         genBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer();
+                checkAnswer(1);
             }
         });
+
         genBtn2 = (Button) findViewById(R.id.answer2);
         genBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongPress();
+                checkAnswer(2);
             }
         });
+
         genBtn3 = (Button) findViewById(R.id.answer3);
         genBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongPress();
+                checkAnswer(3);
             }
         });
     }
-    private void wrongPress(){
-        this.setCalcText("VALE! Proovi uuesti!");
-    }
-    private void checkAnswer(){
-        setCalcText("Sa oled tubli!");
-        newRandom();
+
+    private void checkAnswer(int btnId){
+        String quessedAnswer = getButtonText(btnId);
+        if(calAnswer.equals(quessedAnswer)){
+            newRandom();
+        } else {
+            setCalcText("VALE! Proovi uuesti!");
+        }
     }
     private void newRandom() { // funktsioon, mis käivitub pärast vajutamist
         String[] calculation = this.returnArray(gameLevel); // Tekitab array gamelevel kohaga. See vajalik pärast uute tasemete lisamiseks. Gamelevel on 3, siis tagastatakse kolmekohaline array
@@ -75,10 +79,10 @@ public class Game extends AppCompatActivity {
                 done = true;
             }
         }
-        this.setCalcText(sum.toString());
+        setCalcText(sum.toString());
         String [] shuffledVastused = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
         Collections.shuffle(Arrays.asList(shuffledVastused));
-        this.setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
+        setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
     }
 
     private int randomNumber(double max)
@@ -131,5 +135,19 @@ public class Game extends AppCompatActivity {
         answer2.setText(button2);
         final TextView answer3 = (TextView)findViewById(R.id.answer3);
         answer3.setText(button3);
+    }
+    private String getButtonText(int id){
+        String txt = "";
+        if(id == 1) {
+            final TextView answer1 = (TextView) findViewById(R.id.answer1);
+            txt = (String) answer1.getText();
+        } else if(id == 2){
+            final TextView answer2 = (TextView) findViewById(R.id.answer2);
+            txt = (String) answer2.getText();
+        } else if(id == 3){
+            final TextView answer3 = (TextView) findViewById(R.id.answer3);
+            txt = (String) answer3.getText();
+        }
+        return txt;
     }
 }
