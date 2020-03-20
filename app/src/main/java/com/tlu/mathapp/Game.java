@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
@@ -70,7 +76,9 @@ public class Game extends AppCompatActivity {
             }
         }
         this.setCalcText(sum.toString());
-        this.setButtonsText(calAnswer, calAnswerWrong1, calAnswerWrong2);
+        String [] shuffledVastused = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
+        Collections.shuffle(Arrays.asList(shuffledVastused));
+        this.setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
     }
 
     private int randomNumber(double max)
