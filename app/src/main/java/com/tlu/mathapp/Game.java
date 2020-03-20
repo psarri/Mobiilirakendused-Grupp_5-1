@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Game extends AppCompatActivity {
-    private int gameLevel = 7; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
+    private int gameLevel = 5; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
 
     @Override
