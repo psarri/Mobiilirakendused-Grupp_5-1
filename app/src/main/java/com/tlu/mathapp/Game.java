@@ -1,14 +1,16 @@
 package com.tlu.mathapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
@@ -20,13 +22,33 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
+    private int wrongAnswers;
+    private int score;
+    private long timeLeft;
+    //Creates a timer
+    final CountDownTimer timer = new CountDownTimer(5000, 1000) {
+
+        //Calls every tick
+        public void onTick(long millisUntilFinished) {
+            setTimerText(Long.toString(millisUntilFinished / 1000));
+            timeLeft = millisUntilFinished / 1000;
+        }
+        //Calls on finish
+        public void onFinish() {
+            newRandom();
+            updateLives();
+            setStatusText("Out of time");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        wrongAnswers = 0;
         Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
         newRandom(); // Alguses lisab juba ühe värgi
+
         genBtn1 = (Button) findViewById(R.id.answer1);
         genBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,12 +74,37 @@ public class Game extends AppCompatActivity {
         });
     }
 
+
+
     private void checkAnswer(int btnId){
         String quessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(quessedAnswer)){
             newRandom();
+            setStatusText("correct answer");
+            calculateScore();
         } else {
-            setCalcText("VALE! Proovi uuesti!");
+            updateLives();
+            setStatusText("wrong answer");
+        }
+    }
+
+    //We only calculate score on correct answers
+    private void calculateScore(){
+        score += (gameLevel * 10) + timeLeft;
+        setScoreText(Integer.toString(score));
+    }
+
+    private void updateLives(){
+        wrongAnswers += 1;
+        int lives = 5 - wrongAnswers;
+        setLivesText(Integer.toString(lives) +"/5");
+        //if user has input 5 wrong answers, redirect to game over page
+        if(wrongAnswers >= 5){
+            timer.cancel();
+            Intent intent = new Intent(this, GameOver.class);
+            startActivity(intent);
+        }else {
+            newRandom();
         }
     }
     private void newRandom() { // funktsioon, mis käivitub pärast vajutamist
@@ -83,6 +130,8 @@ public class Game extends AppCompatActivity {
         String [] shuffledVastused = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
         Collections.shuffle(Arrays.asList(shuffledVastused));
         setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
+        timer.cancel();
+        timer.start();
     }
 
     private int randomNumber(double max)
@@ -127,6 +176,32 @@ public class Game extends AppCompatActivity {
     private void setCalcText(String s){
         final TextView calc = (TextView)findViewById(R.id.calc);
         calc.setText(s);
+    }
+    private void setTimerText(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.timer);
+        timerDisplay.setText(s);
+    }
+
+    private void setLivesText(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.lives);
+        timerDisplay.setText(s);
+    }
+
+    private void setScoreText(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.score);
+        timerDisplay.setText("Score: " + s);
+    }
+
+    private void setStatusText(String s){
+        final TextView statusMessage = (TextView) findViewById(R.id.statusMessage);
+        statusMessage.setText(s);
+        //Show the status text only for 1 second
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                statusMessage.setText("");
+            }
+        }, 1000);
     }
     private void setButtonsText(String button1, String button2, String button3){
         final TextView answer1 = (TextView)findViewById(R.id.answer1);
