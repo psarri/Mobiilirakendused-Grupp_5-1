@@ -7,4 +7,7 @@
     <string name="b2_answer">2</string>
     <string name="b3_answer">2</string>
     <string name="game_over">Game Over</string>
+    <string name="status_message"></string>
+    <string name="lives">5/5</string>
+    <string name="score">Score: 0</string>
 </resources>
