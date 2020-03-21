@@ -1,6 +1,8 @@
 package com.tlu.mathapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +22,16 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
+    private int wrongAnswers = 0;
+    final CountDownTimer timer = new CountDownTimer(5000, 1000) {
+
+        public void onTick(long millisUntilFinished) {
+            setTimerText(Long.toString(millisUntilFinished / 1000));
+        }
+        public void onFinish() {
+            newRandom();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +64,20 @@ public class Game extends AppCompatActivity {
         });
     }
 
+
+
     private void checkAnswer(int btnId){
         String quessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(quessedAnswer)){
             newRandom();
         } else {
-            setCalcText("VALE! Proovi uuesti!");
+            wrongAnswers += 1;
+            if(wrongAnswers >= 5){
+                Intent intent = new Intent(this, GameOver.class);
+                startActivity(intent);
+            }else {
+                newRandom();
+            }
         }
     }
     private void newRandom() { // funktsioon, mis käivitub pärast vajutamist
@@ -83,6 +103,8 @@ public class Game extends AppCompatActivity {
         String [] shuffledVastused = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
         Collections.shuffle(Arrays.asList(shuffledVastused));
         setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
+        timer.cancel();
+        timer.start();
     }
 
     private int randomNumber(double max)
@@ -127,6 +149,10 @@ public class Game extends AppCompatActivity {
     private void setCalcText(String s){
         final TextView calc = (TextView)findViewById(R.id.calc);
         calc.setText(s);
+    }
+    private void setTimerText(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.timer);
+        timerDisplay.setText(s);
     }
     private void setButtonsText(String button1, String button2, String button3){
         final TextView answer1 = (TextView)findViewById(R.id.answer1);

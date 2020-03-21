@@ -9,6 +9,16 @@
     tools:context=".Game">
 
     <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="45sp"
+        android:text="@string/time"
+        />
+
+    <TextView
         android:id="@+id/calc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
