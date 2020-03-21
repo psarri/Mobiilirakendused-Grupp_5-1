@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
-    private int wrongAnswers = 0;
+    private int wrongAnswers;
     final CountDownTimer timer = new CountDownTimer(5000, 1000) {
 
         public void onTick(long millisUntilFinished) {
@@ -30,11 +30,13 @@ public class Game extends AppCompatActivity {
         }
         public void onFinish() {
             newRandom();
+            updateGameStatus();
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        wrongAnswers = 0;
         Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
@@ -71,13 +73,18 @@ public class Game extends AppCompatActivity {
         if(calAnswer.equals(quessedAnswer)){
             newRandom();
         } else {
-            wrongAnswers += 1;
-            if(wrongAnswers >= 5){
-                Intent intent = new Intent(this, GameOver.class);
-                startActivity(intent);
-            }else {
-                newRandom();
-            }
+            updateGameStatus();
+        }
+    }
+
+    private void updateGameStatus(){
+        wrongAnswers += 1;
+        if(wrongAnswers >= 5){
+            timer.cancel();
+            Intent intent = new Intent(this, GameOver.class);
+            startActivity(intent);
+        }else {
+            newRandom();
         }
     }
     private void newRandom() { // funktsioon, mis käivitub pärast vajutamist
