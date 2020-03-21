@@ -23,6 +23,7 @@ public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
     private int wrongAnswers;
+    private int currentCorrect;
     private int score;
     private long timeLeft;
     //Creates a timer
@@ -44,6 +45,7 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         wrongAnswers = 0;
+        currentCorrect = 0;
         Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
@@ -65,6 +67,7 @@ public class Game extends AppCompatActivity {
             }
         });
 
+
         genBtn3 = (Button) findViewById(R.id.answer3);
         genBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,16 +75,25 @@ public class Game extends AppCompatActivity {
                 checkAnswer(3);
             }
         });
+
     }
-
-
 
     private void checkAnswer(int btnId){
         String quessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(quessedAnswer)){
-            newRandom();
-            setStatusText("correct answer");
-            calculateScore();
+            currentCorrect++;
+            if(currentCorrect >= 4){
+                currentCorrect = 0;
+                setStatusText("NEXT LEVEL");
+                calculateScore();
+                gameLevel += 2;
+                newRandom();
+            } else {
+                newRandom();
+                setStatusText("correct answer");
+                calculateScore();
+            }
+
         } else {
             updateLives();
             setStatusText("wrong answer");
