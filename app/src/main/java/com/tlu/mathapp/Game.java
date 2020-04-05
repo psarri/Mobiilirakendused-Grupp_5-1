@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
-    private int correctAnswersLimit = 4;
+    private int NextLevelQuota = 4;
     private int wrongAnswers;
     private int currentCorrect;
     private int score;
@@ -83,7 +83,7 @@ public class Game extends AppCompatActivity {
         String quessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(quessedAnswer)){
             currentCorrect++;
-            if(currentCorrect >= correctAnswersLimit){
+            if(currentCorrect >= NextLevelQuota){
                 currentCorrect = 0;
                 setStatusText("NEXT LEVEL");
                 calculateScore();
