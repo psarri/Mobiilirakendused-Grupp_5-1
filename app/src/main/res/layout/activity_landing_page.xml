@@ -5,8 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_gravity="center_vertical"
+    android:layout_gravity="bottom"
+    android:background="@drawable/bg"
     tools:context=".LandingPageActivity">
+
+    <TextView
+        android:id="@+id/game_over_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Mathty"
+        android:fontFamily="cursive"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="250dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="60sp" />
 
     <Button
         android:id="@+id/play_button"
@@ -14,6 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="mängime"
-        android:textSize="45sp" />
-
+        android:width="300sp"
+        android:textSize="45sp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Tulemused"
+        android:width="300sp"
+        android:textSize="45sp"
+        />
 </LinearLayout>

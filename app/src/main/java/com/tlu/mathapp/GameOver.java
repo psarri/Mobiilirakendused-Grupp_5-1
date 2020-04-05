@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOver extends AppCompatActivity {
-    Button gameBtn;
+    Button gameBtn, homeBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +20,20 @@ public class GameOver extends AppCompatActivity {
                 startGame();
             }
         });
+        homeBtn = (Button) findViewById(R.id.to_home);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goHome();
+            }
+        });
     }
     public void startGame() {
         Intent intent = new Intent(this, Game.class);
+        startActivity(intent);
+    }
+    public void goHome() {
+        Intent intent = new Intent(this, LandingPageActivity.class);
         startActivity(intent);
     }
 }
