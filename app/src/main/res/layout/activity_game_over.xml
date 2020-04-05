@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_gravity="center_vertical"
+    android:layout_gravity="bottom"
+    android:background="@drawable/bggame"
     tools:context=".GameOver">
-
     <TextView
         android:id="@+id/game_over_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="45sp"
         android:text="@string/game_over"
-        />
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="200dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="45sp" />
 
     <Button
         android:id="@+id/play_button"
@@ -24,6 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Mängi uuesti"
+        android:width="350dp"
+        android:textSize="45sp" />
+    <Button
+        android:id="@+id/to_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Avalehele"
+        android:width="350dp"
         android:textSize="45sp" />
 
 </LinearLayout>

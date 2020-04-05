@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Õige vastus
+    private int correctAnswersLimit = 4;
     private int wrongAnswers;
     private int currentCorrect;
     private int score;
@@ -82,7 +83,7 @@ public class Game extends AppCompatActivity {
         String quessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(quessedAnswer)){
             currentCorrect++;
-            if(currentCorrect >= 4){
+            if(currentCorrect >= correctAnswersLimit){
                 currentCorrect = 0;
                 setStatusText("NEXT LEVEL");
                 calculateScore();
@@ -167,13 +168,13 @@ public class Game extends AppCompatActivity {
     }
     private String getCorrectAnswer(String ex) {
         Object result = new Object();
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino"); //Vajalik, et saada eval funktsioon Javascriptist kätte
         try {
             result = engine.eval(ex);
         } catch (ScriptException e) {
             e.printStackTrace();
         }
-        return result.toString();
+        return String.format("%.0f", result); //Tagastab ilma komakohata väärtuse
     }
     private String getWrongAnswer(String correctAnswer) {
         double sum = 0;
@@ -181,7 +182,7 @@ public class Game extends AppCompatActivity {
         if(random == 1){sum = Double.parseDouble(correctAnswer) + randomNumber(10);}
         else if(random == 2){sum = Double.parseDouble(correctAnswer) - randomNumber(10);}
         else if(random == 3){sum = Double.parseDouble(correctAnswer) * randomNumber(10);}
-        return String.valueOf(sum);
+        return String.valueOf((int)sum); // Tagastab ilma komakohata väärtuse
     }
 
     //Getters & Setters
