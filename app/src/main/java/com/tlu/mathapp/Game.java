@@ -1,10 +1,13 @@
 package com.tlu.mathapp;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -26,13 +29,12 @@ public class Game extends AppCompatActivity {
     private int wrongAnswers;
     private int currentCorrect;
     private int score;
-    private long timeLeft;
+    private long timeLeft;  // currently not needed
     //Creates a timer
-    final CountDownTimer timer = new CountDownTimer(5000, 1000) {
+    final CountDownTimer timer = new CountDownTimer(6000, 1000) {
 
         //Calls every tick
         public void onTick(long millisUntilFinished) {
-            setTimerText(Long.toString(millisUntilFinished / 1000));
             timeLeft = millisUntilFinished / 1000;
         }
         //Calls on finish
@@ -47,6 +49,7 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         wrongAnswers = 0;
         currentCorrect = 0;
+        timer.cancel(); // Security measure for timer component
         Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
@@ -79,9 +82,18 @@ public class Game extends AppCompatActivity {
 
     }
 
+
+    //We have to control user input on back button pressed
+    @Override
+    public void onBackPressed() {
+        timer.cancel(); // cancel timer, which cancels the game
+        Intent intent = new Intent(this, LandingPageActivity.class);
+        startActivity(intent);
+    }
+
     private void checkAnswer(int btnId){
-        String quessedAnswer = getButtonText(btnId);
-        if(calAnswer.equals(quessedAnswer)){
+        String guessedAnswer = getButtonText(btnId);
+        if(calAnswer.equals(guessedAnswer)){
             currentCorrect++;
             if(currentCorrect >= NextLevelQuota){
                 currentCorrect = 0;
@@ -145,6 +157,7 @@ public class Game extends AppCompatActivity {
         setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
         timer.cancel();
         timer.start();
+        animateProgressBar();
     }
 
     private int randomNumber(double max)
@@ -190,14 +203,18 @@ public class Game extends AppCompatActivity {
         final TextView calc = (TextView)findViewById(R.id.calc);
         calc.setText(s);
     }
-    private void setTimerText(String s){
-        final TextView timerDisplay = (TextView) findViewById(R.id.timer);
-        timerDisplay.setText(s);
-    }
 
     private void setLivesText(String s){
         final TextView timerDisplay = (TextView) findViewById(R.id.lives);
         timerDisplay.setText(s);
+    }
+
+    private void animateProgressBar(){
+        final ProgressBar pb = (ProgressBar) findViewById(R.id.determinateBar);
+        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 5000, 0);
+        animation.setDuration(6000); // 6 seconds
+        animation.setInterpolator(new DecelerateInterpolator()); // animates towards 0
+        animation.start();
     }
 
     private void setScoreText(String s){
