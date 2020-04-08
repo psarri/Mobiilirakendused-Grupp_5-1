@@ -39,8 +39,7 @@ public class GameOver extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = (EditText)findViewById(R.id.nameInput);
-                submitResult(name.getText().toString(), score);
+                SaveToDB();
             }
         });
         //Not recommended to access on main thread, because larger db-s will lock the UI
@@ -49,6 +48,21 @@ public class GameOver extends AppCompatActivity {
         this.score = getIntent().getStringExtra("SCORE");
         setScoreText(score);
     }
+
+    //We have to control user input on back button pressed
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LandingPageActivity.class);
+        startActivity(intent);
+        //SaveToDB(); // Currently we allow user not to save score.
+    }
+
+    private void SaveToDB(){
+        name = (EditText)findViewById(R.id.nameInput);
+        submitResult(name.getText().toString(), score);
+    }
+
+
     public void startGame() {
         Intent intent = new Intent(this, Game.class);
         startActivity(intent);
