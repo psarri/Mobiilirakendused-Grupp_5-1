@@ -15,9 +15,42 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/game_over"
         android:layout_marginTop="200dp"
-        android:layout_marginBottom="200dp"
         android:textColor="@color/colorPrimary"
         android:textSize="45sp" />
+
+    <TextView
+        android:id="@+id/game_over_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/game_over_score"
+        android:textColor="@color/colorPrimary"
+        android:textSize="45sp"
+        />
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="259dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#CCCCCC"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        >
+
+        <requestFocus />
+    </EditText>
+    <Button
+        android:id="@+id/inputButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:background="#0099FF"
+        android:text="@string/inputButton"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/play_button"
@@ -26,7 +59,8 @@
         android:layout_gravity="center_horizontal"
         android:text="Mängi uuesti"
         android:width="350dp"
-        android:textSize="45sp" />
+        android:layout_marginTop="100dp"
+        android:textSize="25sp" />
     <Button
         android:id="@+id/to_home"
         android:layout_width="wrap_content"
@@ -34,6 +68,6 @@
         android:layout_gravity="center_horizontal"
         android:text="Avalehele"
         android:width="350dp"
-        android:textSize="45sp" />
+        android:textSize="25sp" />
 
 </LinearLayout>

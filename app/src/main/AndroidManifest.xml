@@ -12,6 +12,7 @@
         <activity android:name=".LandingPageActivity" />
         <activity android:name=".Game" />
         <activity android:name=".GameOver" />
+        <activity android:name=".ResultsTable" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
