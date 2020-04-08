@@ -38,6 +38,7 @@ public class Game extends AppCompatActivity {
         //Calls every tick
         public void onTick(long millisUntilFinished) {
             timeLeft = millisUntilFinished / 1000;
+            setTimeleft(timeLeft + "");
         }
         //Calls on finish
         public void onFinish() {
@@ -209,6 +210,11 @@ public class Game extends AppCompatActivity {
 
     private void setLivesText(String s){
         final TextView timerDisplay = (TextView) findViewById(R.id.lives);
+        timerDisplay.setText(s);
+    }
+
+    private void setTimeleft(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.timeNumber);
         timerDisplay.setText(s);
     }
 
