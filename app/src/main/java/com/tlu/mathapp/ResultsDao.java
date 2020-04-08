@@ -12,6 +12,12 @@ public interface ResultsDao {
     @Query("SELECT * FROM results")
     List<Result> getAll();
 
+    @Query("SELECT name FROM results")
+    List<String> getAllNames();
+
+    @Query("SELECT score FROM results")
+    List<String> getAllScores();
+
     @Query("SELECT * FROM results WHERE name LIKE :name LIMIT 1")
     Result findByName(String name);
 

@@ -10,7 +10,7 @@ import android.widget.Button;
 public class LandingPageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button gameBtn;
+        Button gameBtn, resBtn;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
@@ -22,10 +22,24 @@ public class LandingPageActivity extends AppCompatActivity{
                 startGame();
             }
         });
+
+        gameBtn = (Button) findViewById(R.id.results_button);
+        gameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                results();
+            }
+        });
     }
     // Start game
     public void startGame() {
         Intent intent = new Intent(this, Game.class);
+        startActivity(intent);
+    }
+
+    // Start game
+    public void results() {
+        Intent intent = new Intent(this, ResultsTable.class);
         startActivity(intent);
     }
 }
