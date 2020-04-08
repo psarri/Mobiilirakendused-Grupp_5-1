@@ -3,6 +3,7 @@ package com.tlu.mathapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 
 public class Game extends AppCompatActivity {
@@ -115,6 +117,7 @@ public class Game extends AppCompatActivity {
         if(wrongAnswers >= 5){
             timer.cancel();
             Intent intent = new Intent(this, GameOver.class);
+            intent.putExtra("SCORE", this.score + "");
             startActivity(intent);
         }else {
             newRandom();

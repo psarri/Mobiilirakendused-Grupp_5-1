@@ -10,4 +10,5 @@
     <string name="status_message"></string>
     <string name="lives">5/5</string>
     <string name="score">Score: 0</string>
+    <string name="game_over_score">"Score: "</string>
 </resources>
