@@ -226,7 +226,7 @@ public class Game extends AppCompatActivity {
 
     private void setScoreText(String s){
         final TextView timerDisplay = (TextView) findViewById(R.id.score);
-        timerDisplay.setText("Score: " + s);
+        timerDisplay.setText(s);
     }
 
     private void setStatusText(String s){

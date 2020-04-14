@@ -3,122 +3,147 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_gravity="center_vertical"
     android:background="@drawable/bggame"
+    android:weightSum="10"
     tools:context=".Game">
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/timeNumber"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:alpha="0.8"
-            android:text="@string/timeNumber"
-            android:textColor="@color/colorGray"
-            android:textSize="30sp" />
-
-        <ProgressBar
-            android:id="@+id/determinateBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/circle_shape"
-            android:indeterminate="false"
-            android:max="5000"
-            android:progress="0"
-            android:progressDrawable="@drawable/circular_progress_bar"
-            android:scaleX="-1" />
-
-        <TextView
-            android:id="@+id/score"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:baselineAligned="false">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="60dp"
-            android:alpha="0.6"
-            android:text="@string/score"
-            android:textColor="@color/colorGray"
-            android:textSize="45sp" />
-        <TextView
-            android:id="@+id/lives"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="start"
+            tools:ignore="NestedWeights">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/timeNumber"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:alpha="0.8"
+                    android:text="@string/timeNumber"
+                    android:textColor="@color/colorGray"
+                    android:textSize="30sp" />
+
+                <ProgressBar
+                    android:id="@+id/determinateBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/circle_shape"
+                    android:indeterminate="false"
+                    android:max="5000"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/circular_progress_bar"
+                    android:scaleX="-1" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="30dp"
-            android:alpha="0.6"
-            android:text="@string/lives"
-            android:textColor="@color/colorGray"
-            android:textSize="45sp" />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="end">
+            <TextView
+                android:id="@+id/lives"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:alpha="0.6"
+                android:text="@string/lives"
+                android:textColor="@color/colorGray"
+                android:textSize="30sp" />
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:alpha="0.6"
+                android:text="@string/score"
+                android:textColor="@color/colorGray"
+                android:textSize="30sp" />
 
-
-    <TextView
-        android:id="@+id/statusMessage"
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/status_message"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:textSize="45sp" />
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:weightSum="2">
+        <TextView
+            android:id="@+id/statusMessage"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/status_message"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            tools:ignore="NestedWeights" />
 
 
-    <TextView
-        android:id="@+id/calc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/calculation"
-        android:textColor="@color/colorPrimary"
-        android:textSize="45sp" />
-
-    <Button
-        android:id="@+id/answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:text="@string/b1_answer"
-        android:textColor="@color/colorPrimary"
-        android:width="200dp"
-        android:textSize="40sp" />
-
-    <Button
-        android:id="@+id/answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/b2_answer"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="10dp"
-        android:width="200dp"
-        android:textSize="40sp" />
-
-    <Button
-        android:id="@+id/answer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/b3_answer"
-        android:width="200dp"
-        android:textSize="40sp" />
-
+        <TextView
+            android:id="@+id/calc"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/calculation"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textSize="45sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:gravity="center"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/answer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/b1_answer"
+            android:textColor="@color/colorPrimary"
+            android:width="200dp"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/answer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/b2_answer"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:width="200dp"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/b3_answer"
+            android:layout_marginTop="10dp"
+            android:width="200dp"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
