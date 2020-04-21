@@ -46,6 +46,8 @@ public class Game extends AppCompatActivity {
             setStatusText("Out of time");
         }
     };
+    // Initialize Class
+    private SoundPlayer sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class Game extends AppCompatActivity {
         Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
+
+        sound = new SoundPlayer(this); // Toob playeri sisse
         newRandom(); // Alguses lisab juba ühe värgi
 
         genBtn1 = (Button) findViewById(R.id.answer1);
@@ -97,6 +101,7 @@ public class Game extends AppCompatActivity {
         String guessedAnswer = getButtonText(btnId);
         if(calAnswer.equals(guessedAnswer)){
             currentCorrect++;
+            sound.playCorrectSound(); // Mängib õigesti vastanud heli
             if(currentCorrect >= NextLevelQuota){
                 currentCorrect = 0;
                 setStatusText("NEXT LEVEL");
@@ -111,6 +116,7 @@ public class Game extends AppCompatActivity {
 
         } else {
             updateLives();
+            sound.playWrongSound(); // Mängib valesti läinud heli
             setStatusText("wrong answer");
         }
     }
@@ -129,6 +135,7 @@ public class Game extends AppCompatActivity {
         if(wrongAnswers >= 5){
             timer.cancel();
             Intent intent = new Intent(this, GameOver.class);
+            sound.playOverSound(); // Game over heli mängu lõpus
             intent.putExtra("SCORE", this.score + "");
             startActivity(intent);
         }else {
