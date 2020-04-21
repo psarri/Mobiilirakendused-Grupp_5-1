@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -21,7 +20,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 
 public class Game extends AppCompatActivity {
@@ -36,8 +34,9 @@ public class Game extends AppCompatActivity {
     final CountDownTimer timer = new CountDownTimer(6000, 1000) {
 
         //Calls every tick
-        public void onTick(long millisUntilFinished) {
-            timeLeft = millisUntilFinished / 1000;
+        public void onTick(long msUntilFinished) {
+            timeLeft = msUntilFinished / 1000;
+            setTimeLeft(Long.toString(timeLeft));
         }
         //Calls on finish
         public void onFinish() {
@@ -219,6 +218,11 @@ public class Game extends AppCompatActivity {
         timerDisplay.setText(s);
     }
 
+    private void setTimeLeft(String s){
+        final TextView timerDisplay = (TextView) findViewById(R.id.timeNumber);
+        timerDisplay.setText(s);
+    }
+
     private void animateProgressBar(){
         final ProgressBar pb = (ProgressBar) findViewById(R.id.determinateBar);
         ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 5000, 0);
@@ -229,7 +233,7 @@ public class Game extends AppCompatActivity {
 
     private void setScoreText(String s){
         final TextView timerDisplay = (TextView) findViewById(R.id.score);
-        timerDisplay.setText("Score: " + s);
+        timerDisplay.setText(s);
     }
 
     private void setStatusText(String s){
