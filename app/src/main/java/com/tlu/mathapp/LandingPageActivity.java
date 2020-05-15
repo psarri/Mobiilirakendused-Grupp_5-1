@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class LandingPageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button gameBtn, resBtn;
+        final Button gameBtn, resBtn;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
@@ -20,14 +22,16 @@ public class LandingPageActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startGame();
+                bounceAnimation(v, gameBtn);
             }
         });
 
-        gameBtn = (Button) findViewById(R.id.results_button);
-        gameBtn.setOnClickListener(new View.OnClickListener() {
+        resBtn = (Button) findViewById(R.id.results_button);
+        resBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 results();
+                bounceAnimation(v, resBtn);
             }
         });
     }
@@ -37,9 +41,17 @@ public class LandingPageActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    // Start game
+    // Results page
     public void results() {
         Intent intent = new Intent(this, ResultsTable.class);
         startActivity(intent);
+    }
+
+    // Button animation
+    public void bounceAnimation(View view, Button btn) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        BounceInterpolator interpolator = new BounceInterpolator(0.1, 20);
+        myAnim.setInterpolator(interpolator);
+        btn.startAnimation(myAnim);
     }
 }
