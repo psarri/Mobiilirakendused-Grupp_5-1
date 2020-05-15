@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startGame();
+                bounceAnimation(v, gameBtn);
             }
         });
         homeBtn = (Button) findViewById(R.id.to_home);
@@ -32,6 +35,7 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goHome();
+                bounceAnimation(v, homeBtn);
             }
         });
 
@@ -40,6 +44,7 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SaveToDB();
+                bounceAnimation(view, okBtn);
             }
         });
         //Not recommended to access on main thread, because larger db-s will lock the UI
@@ -82,6 +87,14 @@ public class GameOver extends AppCompatActivity {
         Result result = new Result(name, score);
         db.resultsDao().insertAll(result);
         goHome();
+    }
+
+    // Button animation
+    public void bounceAnimation(View view, Button btn) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        BounceInterpolator interpolator = new BounceInterpolator(0.1, 20);
+        myAnim.setInterpolator(interpolator);
+        btn.startAnimation(myAnim);
     }
 
 }

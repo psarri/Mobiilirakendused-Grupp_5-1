@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,7 +56,7 @@ public class Game extends AppCompatActivity {
         wrongAnswers = 0;
         currentCorrect = 0;
         timer.cancel(); // Security measure for timer component
-        Button genBtn1, genBtn2, genBtn3;
+        final Button genBtn1, genBtn2, genBtn3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game); // Sätestab layouti
 
@@ -66,6 +68,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(1);
+                bounceAnimation(v, genBtn1);
             }
         });
 
@@ -74,6 +77,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(2);
+                bounceAnimation(v, genBtn2);
             }
         });
 
@@ -83,6 +87,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(3);
+                bounceAnimation(v, genBtn3);
             }
         });
 
@@ -212,6 +217,7 @@ public class Game extends AppCompatActivity {
     private void setCalcText(String s){
         final TextView calc = (TextView)findViewById(R.id.calc);
         calc.setText(s);
+        slideAnimation(calc);
     }
 
     private void setLivesText(String s){
@@ -274,5 +280,18 @@ public class Game extends AppCompatActivity {
             txt = (String) answer3.getText();
         }
         return txt;
+    }
+
+    // Button animation
+    public void bounceAnimation(View view, Button btn) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        BounceInterpolator interpolator = new BounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        btn.startAnimation(myAnim);
+    }
+    // Slide animation
+    public void slideAnimation(View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.slide);
+        view.startAnimation(myAnim);
     }
 }
