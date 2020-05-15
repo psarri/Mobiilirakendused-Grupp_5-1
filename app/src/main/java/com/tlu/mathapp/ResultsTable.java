@@ -27,7 +27,7 @@ public class ResultsTable extends AppCompatActivity {
         List<String> scores = db.resultsDao().getAllScores();
         List<String> merged = new ArrayList<>();
         for(int i = 0; i<names.size(); i++){
-            String mergedValue = names.get(i) + " - " + scores.get(i) + " punkti";
+            String mergedValue = names.get(i) + " - " + scores.get(i) + " points";
             merged.add(mergedValue);
         }
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, merged);

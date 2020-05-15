@@ -44,13 +44,14 @@
             android:id="@+id/play_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/go_play"
+            android:text="Play"
             android:textSize="30sp" />
+
         <Button
             android:id="@+id/results_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/results"
+            android:text="Results"
             android:textSize="30sp" />
     </LinearLayout>
 
