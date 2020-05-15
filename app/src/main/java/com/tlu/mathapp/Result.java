@@ -21,4 +21,12 @@ public class Result {
         this.score = score;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public String getScore(){
+        return this.score;
+    }
+
 }
