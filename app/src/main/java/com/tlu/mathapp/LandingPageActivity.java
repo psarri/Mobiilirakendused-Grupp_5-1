@@ -35,6 +35,21 @@ public class LandingPageActivity extends AppCompatActivity{
             }
         });
     }
+
+    //Dont let uer go back to game with back button
+    @Override
+    public void onBackPressed() {
+        if (shouldAllowBack()) {
+            super.onBackPressed();
+        }
+    }
+
+    //Back button logic
+    private boolean shouldAllowBack() {
+        //Don't allow to go back
+        return false;
+    }
+
     // Start game
     public void startGame() {
         Intent intent = new Intent(this, Game.class);
