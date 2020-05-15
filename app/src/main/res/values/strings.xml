@@ -17,4 +17,7 @@
     <string name="game_name">Mathty</string>
     <string name="play_again">Mängi uuesti</string>
     <string name="to_homepage">Avalehele</string>
+    <string name="results_table_name">Name</string>
+    <string name="results_table_score">Score</string>
+    <string name="text_view">Textview</string>
 </resources>
