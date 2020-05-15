@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
-    private String calAnswer; // Õige vastus
+    private String calAnswer; // Right answer
     private int NextLevelQuota = 4;
     private int wrongAnswers;
     private int currentCorrect;
@@ -103,20 +104,20 @@ public class Game extends AppCompatActivity {
             sound.playCorrectSound(); // Mängib õigesti vastanud heli
             if(currentCorrect >= NextLevelQuota){
                 currentCorrect = 0;
-                setStatusText("NEXT LEVEL");
+                setStatusText("level_up");
                 calculateScore();
                 gameLevel += 2;
                 newRandom();
             } else {
                 newRandom();
-                setStatusText("correct answer");
+                setStatusText("thumb_up");
                 calculateScore();
             }
 
         } else {
             updateLives();
             sound.playWrongSound(); // Mängib valesti läinud heli
-            setStatusText("wrong answer");
+            setStatusText("thumb_down");
         }
     }
 
@@ -129,7 +130,7 @@ public class Game extends AppCompatActivity {
     private void updateLives(){
         wrongAnswers += 1;
         int lives = 5 - wrongAnswers;
-        setLivesText(Integer.toString(lives) +"/5");
+        setLivesText(lives +"/5");
         //if user has input 5 wrong answers, redirect to game over page
         if(wrongAnswers >= 5){
             timer.cancel();
@@ -161,9 +162,9 @@ public class Game extends AppCompatActivity {
             }
         }
         setCalcText(sum.toString());
-        String [] shuffledVastused = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
-        Collections.shuffle(Arrays.asList(shuffledVastused));
-        setButtonsText(shuffledVastused[0], shuffledVastused[1], shuffledVastused[2]);
+        String [] shuffledAnswers = new String[] {calAnswer, calAnswerWrong1, calAnswerWrong2 };
+        Collections.shuffle(Arrays.asList(shuffledAnswers));
+        setButtonsText(shuffledAnswers[0], shuffledAnswers[1], shuffledAnswers[2]);
         timer.cancel();
         timer.start();
         animateProgressBar();
@@ -237,13 +238,18 @@ public class Game extends AppCompatActivity {
     }
 
     private void setStatusText(String s){
-        final TextView statusMessage = (TextView) findViewById(R.id.statusMessage);
-        statusMessage.setText(s);
+        final ImageView statusMessage = (ImageView) findViewById(R.id.statusMessage);
+        statusMessage.setVisibility(View.VISIBLE);
+
+        if(s.equals("thumb_up")) { statusMessage.setImageResource(R.drawable.thumb_up); }
+        else if(s.equals("level_up")) { statusMessage.setImageResource(R.drawable.level_up); }
+        else { statusMessage.setImageResource(R.drawable.thumb_down); }
+
         //Show the status text only for 1 second
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                statusMessage.setText("");
+                statusMessage.setVisibility(View.INVISIBLE);
             }
         }, 1000);
     }

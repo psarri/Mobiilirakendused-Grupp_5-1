@@ -86,16 +86,20 @@
         android:layout_weight="2"
         android:orientation="vertical"
         android:weightSum="2">
-        <TextView
+
+        <ImageView
             android:id="@+id/statusMessage"
+            android:contentDescription="Status Message"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/status_message"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"
-            android:textSize="45sp"
-            tools:ignore="NestedWeights" />
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/level_up"
+            tools:src="@drawable/level_up"
+            tools:ignore="NestedWeights"
+            android:visibility="invisible"
+            android:alpha=".4"
+            />
 
 
         <TextView

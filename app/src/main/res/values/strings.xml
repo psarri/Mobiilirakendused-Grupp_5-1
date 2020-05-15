@@ -7,10 +7,14 @@
     <string name="b2_answer">2</string>
     <string name="b3_answer">2</string>
     <string name="game_over">Game Over</string>
-    <string name="status_message"></string>
     <string name="lives">5/5</string>
     <string name="score">0</string>
     <string name="game_over_score">"Score: "</string>
     <string name="inputButton">SAVE</string>
     <string name="timeNumber">5</string>
+    <string name="go_play">mängima</string>
+    <string name="results">Tulemused</string>
+    <string name="game_name">Mathty</string>
+    <string name="play_again">Mängi uuesti</string>
+    <string name="to_homepage">Avalehele</string>
 </resources>

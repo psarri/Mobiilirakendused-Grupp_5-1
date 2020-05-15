@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mathty"
+            android:text="@string/game_name"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:fontFamily="cursive"
@@ -44,14 +44,14 @@
             android:id="@+id/play_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="mängime"
-            android:textSize="45sp" />
+            android:text="@string/go_play"
+            android:textSize="30sp" />
         <Button
             android:id="@+id/results_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tulemused"
-            android:textSize="45sp" />
+            android:text="@string/results"
+            android:textSize="30sp" />
     </LinearLayout>
 
 
