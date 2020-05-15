@@ -19,6 +19,7 @@ public class SoundPlayer {
         correctSound = soundPool.load(context, R.raw.correct, 1);
         overSound = soundPool.load(context, R.raw.over, 1);
         wrongSound = soundPool.load(context, R.raw.wrong, 1);
+
     }
 
     public void playCorrectSound() {
@@ -38,4 +39,5 @@ public class SoundPlayer {
         // play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
         soundPool.play(wrongSound, 1.0f, 1.0f, 1, 0, 1.0f);
     }
+
 }
