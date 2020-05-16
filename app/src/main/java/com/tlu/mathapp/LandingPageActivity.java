@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import com.tlu.mathapp.MainActivity;
 
 public class LandingPageActivity extends AppCompatActivity{
-    private MusicService mServ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Button gameBtn, resBtn, musicBtn;
@@ -36,11 +37,13 @@ public class LandingPageActivity extends AppCompatActivity{
             }
         });
 
-        musicBtn = (Button) findViewById(R.id.music_button);
+        musicBtn = findViewById(R.id.music_button);
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mServ.pauseMusic();
+                if (MainActivity.mServ != null) {
+                    MainActivity.mServ.pauseMusic();
+                }
             }
         });
 

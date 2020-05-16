@@ -12,6 +12,7 @@ import android.os.PowerManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static MusicService mServ;
     HomeWatcher mHomeWatcher;
 
     @Override
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
     // Bind/unbound music service
     private boolean mIsBound = false;
-    private MusicService mServ;
     private ServiceConnection Scon =new ServiceConnection(){
 
         public void onServiceConnected(ComponentName name, IBinder
@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-
         // UNBIND music service
         doUnbindService();
         Intent music = new Intent();
