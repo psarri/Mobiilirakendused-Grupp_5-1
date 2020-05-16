@@ -13,11 +13,16 @@
             android:name=".MusicService"
             android:enabled="true" />
 
-        <activity android:name=".LandingPageActivity" />
-        <activity android:name=".Game" />
-        <activity android:name=".GameOver" />
-        <activity android:name=".ResultsTable" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LandingPageActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Game"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GameOver"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ResultsTable"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
