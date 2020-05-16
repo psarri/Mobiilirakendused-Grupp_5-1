@@ -29,11 +29,11 @@ Android Native
 
 ## Pildid
 
-![mobla 1]('pics/1.jpg')
-![mobla 1]('pics/2.jpg')
-![mobla 1]('pics/3.jpg')
-![mobla 1]('pics/4.jpg')
+![mobla 1]('https://github.com/gertpak/Mobiilirakendused-Grupp_5-1/blob/master/pics/1.jpg)
+![mobla 1]('https://github.com/gertpak/Mobiilirakendused-Grupp_5-1/blob/master/pics/2.jpg')
+![mobla 1]('https://github.com/gertpak/Mobiilirakendused-Grupp_5-1/blob/master/pics/3.jpg')
+![mobla 1]('https://github.com/gertpak/Mobiilirakendused-Grupp_5-1/blob/master/pics/4.jpg')
 
-##APK
+## APK
 [Tõmba alla mathty APK](./apk/mathty.apk)
 
