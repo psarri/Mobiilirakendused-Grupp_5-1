@@ -38,7 +38,6 @@ public class LandingPageActivity extends AppCompatActivity{
             public void onClick(View v) {
                 results();
                 bounceAnimation(resBtn);
-                MainActivity.mServ.resumeMusic();
             }
         });
 
