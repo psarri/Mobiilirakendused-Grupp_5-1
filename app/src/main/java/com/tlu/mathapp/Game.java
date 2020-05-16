@@ -33,6 +33,7 @@ public class Game extends AppCompatActivity {
     private int currentCorrect;
     private int score;
     private long timeLeft;  // currently not needed
+    private long timeDelay = 250;
     //Creates a timer
     final CountDownTimer timer = new CountDownTimer(6000, 1000) {
 
@@ -214,10 +215,15 @@ public class Game extends AppCompatActivity {
     }
 
     //Getters & Setters
-    private void setCalcText(String s){
+    private void setCalcText(final String s){
         final TextView calc = (TextView)findViewById(R.id.calc);
-        calc.setText(s);
-        slideAnimation(calc);
+        slideAnimation(calc, s);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                calc.setText(s);
+            }
+        }, timeDelay);
     }
 
     private void setLivesText(String s){
@@ -232,8 +238,8 @@ public class Game extends AppCompatActivity {
 
     private void animateProgressBar(){
         final ProgressBar pb = (ProgressBar) findViewById(R.id.determinateBar);
-        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 5000, 0);
-        animation.setDuration(6000); // 6 seconds
+        ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 6000, 0);
+        animation.setDuration(7000);
         animation.setInterpolator(new DecelerateInterpolator()); // animates towards 0
         animation.start();
     }
@@ -290,8 +296,15 @@ public class Game extends AppCompatActivity {
         btn.startAnimation(myAnim);
     }
     // Slide animation
-    public void slideAnimation(View view) {
+    public void slideAnimation(final View view, String s) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.slide);
-        view.startAnimation(myAnim);
+        final Animation myAnim2 = AnimationUtils.loadAnimation(this, R.anim.slide2);
+        view.startAnimation(myAnim2);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                view.startAnimation(myAnim);
+            }
+        }, timeDelay);
     }
 }
