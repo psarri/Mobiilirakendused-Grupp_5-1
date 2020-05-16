@@ -45,7 +45,7 @@ public class Game extends AppCompatActivity {
         public void onFinish() {
             newRandom();
             updateLives();
-            setStatusText("Out of time");
+            setStatusImage("out_of_time");
         }
     };
     // Initialize Class
@@ -109,20 +109,20 @@ public class Game extends AppCompatActivity {
             sound.playCorrectSound(); // Mängib õigesti vastanud heli
             if(currentCorrect >= NextLevelQuota){
                 currentCorrect = 0;
-                setStatusText("level_up");
+                setStatusImage("level_up");
                 calculateScore();
                 gameLevel += 2;
                 newRandom();
             } else {
                 newRandom();
-                setStatusText("thumb_up");
+                setStatusImage("thumb_up");
                 calculateScore();
             }
 
         } else {
             updateLives();
             sound.playWrongSound(); // Mängib valesti läinud heli
-            setStatusText("thumb_down");
+            setStatusImage("thumb_down");
         }
     }
 
@@ -243,12 +243,13 @@ public class Game extends AppCompatActivity {
         timerDisplay.setText(s);
     }
 
-    private void setStatusText(String s){
+    private void setStatusImage(String s){
         final ImageView statusMessage = (ImageView) findViewById(R.id.statusMessage);
         statusMessage.setVisibility(View.VISIBLE);
 
         if(s.equals("thumb_up")) { statusMessage.setImageResource(R.drawable.thumb_up); }
         else if(s.equals("level_up")) { statusMessage.setImageResource(R.drawable.level_up); }
+        else if(s.equals("out_of_time")) { statusMessage.setImageResource(R.drawable.out_of_time); }
         else { statusMessage.setImageResource(R.drawable.thumb_down); }
 
         //Show the status text only for 1 second
