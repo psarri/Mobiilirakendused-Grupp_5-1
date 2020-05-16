@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Matemaatika</string>
+    <string name="app_name">Mathty</string>
     <string name="m2ngima">Mängima</string>
     <string name="calculation">2+2</string>
     <string name="time">60</string>
