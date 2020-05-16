@@ -27,6 +27,9 @@ Android Native
 * Android SDK Platform-tools 29.0.6
 * Android SDK Tools 26.1.1
 
+## APK
+[Tõmba alla mathty APK](./apk/mathty.apk)
+
 ## Pildid
 
 ![mobla 1](pics/1.jpg)
@@ -34,6 +37,4 @@ Android Native
 ![mobla 1](pics/3.jpg)
 ![mobla 1](pics/4.jpg)
 
-## APK
-[Tõmba alla mathty APK](./apk/mathty.apk)
 
