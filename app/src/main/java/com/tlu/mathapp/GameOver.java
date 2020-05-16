@@ -1,8 +1,8 @@
 package com.tlu.mathapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,35 +22,35 @@ public class GameOver extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
-        gameBtn = (Button) findViewById(R.id.play_button);
+        gameBtn = findViewById(R.id.play_button);
         gameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGame();
-                bounceAnimation(v, gameBtn);
+                bounceAnimation(gameBtn);
             }
         });
-        homeBtn = (Button) findViewById(R.id.to_home);
+        homeBtn = findViewById(R.id.to_home);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goHome();
-                bounceAnimation(v, homeBtn);
+                bounceAnimation(homeBtn);
             }
         });
 
-        okBtn = (Button) findViewById(R.id.inputButton);
+        okBtn = findViewById(R.id.inputButton);
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SaveToDB();
-                bounceAnimation(view, okBtn);
+                bounceAnimation(okBtn);
             }
         });
         //Not recommended to access on main thread, because larger db-s will lock the UI
         //Since our application is small, it should not be a problem, so we will allow it via allowMainThreadQueries()
-        this.db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "results").allowMainThreadQueries().build();
-        this.score = getIntent().getStringExtra("SCORE");
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "results").allowMainThreadQueries().build();
+        score = getIntent().getStringExtra("SCORE");
         setScoreText(score);
     }
 
@@ -63,7 +63,7 @@ public class GameOver extends AppCompatActivity {
     }
 
     private void SaveToDB(){
-        name = (EditText)findViewById(R.id.nameInput);
+        name = findViewById(R.id.nameInput);
         submitResult(name.getText().toString(), score);
     }
 
@@ -77,20 +77,21 @@ public class GameOver extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressLint("SetTextI18n")
     private void setScoreText(String s){
-        final TextView score = (TextView)findViewById(R.id.game_over_score);
+        final TextView score = findViewById(R.id.game_over_score);
         score.setText("Score: " + s);
     }
 
     private void submitResult(String name, String score){
-        if(name.matches("")) name = "nimetu"; // if name is empty
+        if(name.matches("")) name = "Nameless"; // if name is empty
         Result result = new Result(name, score);
         db.resultsDao().insertAll(result);
         goHome();
     }
 
     // Button animation
-    public void bounceAnimation(View view, Button btn) {
+    public void bounceAnimation(Button btn) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         BounceInterpolator interpolator = new BounceInterpolator(0.1, 20);
         myAnim.setInterpolator(interpolator);

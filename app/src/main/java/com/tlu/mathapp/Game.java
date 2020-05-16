@@ -4,7 +4,9 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -15,8 +17,6 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
@@ -28,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Game extends AppCompatActivity {
     private int gameLevel = 3; // See, mitmendast levelist alustad, hetkel LVL 3. Kui on 3, on kaks arvu, kui on 5 - 3 arvu, 7 - 4 arvu.
     private String calAnswer; // Right answer
-    private int NextLevelQuota = 4;
     private int wrongAnswers;
     private int currentCorrect;
     private int score;
@@ -64,31 +63,31 @@ public class Game extends AppCompatActivity {
         sound = new SoundPlayer(this); // Toob playeri sisse
         newRandom(); // Alguses lisab juba ühe värgi
 
-        genBtn1 = (Button) findViewById(R.id.answer1);
+        genBtn1 = findViewById(R.id.answer1);
         genBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(1);
-                bounceAnimation(v, genBtn1);
+                bounceAnimation(genBtn1);
             }
         });
 
-        genBtn2 = (Button) findViewById(R.id.answer2);
+        genBtn2 = findViewById(R.id.answer2);
         genBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(2);
-                bounceAnimation(v, genBtn2);
+                bounceAnimation(genBtn2);
             }
         });
 
 
-        genBtn3 = (Button) findViewById(R.id.answer3);
+        genBtn3 = findViewById(R.id.answer3);
         genBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(3);
-                bounceAnimation(v, genBtn3);
+                bounceAnimation(genBtn3);
             }
         });
 
@@ -108,7 +107,8 @@ public class Game extends AppCompatActivity {
         if(calAnswer.equals(guessedAnswer)){
             currentCorrect++;
             sound.playCorrectSound(); // Mängib õigesti vastanud heli
-            if(currentCorrect >= NextLevelQuota){
+            int nextLevelQuota = 4;
+            if(currentCorrect >= nextLevelQuota){
                 currentCorrect = 0;
                 setStatusImage("level_up");
                 calculateScore();
@@ -216,9 +216,9 @@ public class Game extends AppCompatActivity {
 
     //Getters & Setters
     private void setCalcText(final String s){
-        final TextView calc = (TextView)findViewById(R.id.calc);
-        slideAnimation(calc, s);
-        new Timer().schedule(new TimerTask() {
+        final TextView calc = findViewById(R.id.calc);
+        slideAnimation(calc);
+        new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 calc.setText(s);
@@ -227,17 +227,17 @@ public class Game extends AppCompatActivity {
     }
 
     private void setLivesText(String s){
-        final TextView timerDisplay = (TextView) findViewById(R.id.lives);
+        final TextView timerDisplay = findViewById(R.id.lives);
         timerDisplay.setText(s);
     }
 
     private void setTimeLeft(String s){
-        final TextView timerDisplay = (TextView) findViewById(R.id.timeNumber);
+        final TextView timerDisplay = findViewById(R.id.timeNumber);
         timerDisplay.setText(s);
     }
 
     private void animateProgressBar(){
-        final ProgressBar pb = (ProgressBar) findViewById(R.id.determinateBar);
+        final ProgressBar pb = findViewById(R.id.determinateBar);
         ObjectAnimator animation = ObjectAnimator.ofInt(pb, "progress", 6000, 0);
         animation.setDuration(7000);
         animation.setInterpolator(new DecelerateInterpolator()); // animates towards 0
@@ -245,21 +245,21 @@ public class Game extends AppCompatActivity {
     }
 
     private void setScoreText(String s){
-        final TextView timerDisplay = (TextView) findViewById(R.id.score);
+        final TextView timerDisplay = findViewById(R.id.score);
         timerDisplay.setText(s);
     }
 
     private void setStatusImage(String s){
-        final ImageView statusMessage = (ImageView) findViewById(R.id.statusMessage);
+        final ImageView statusMessage = findViewById(R.id.statusMessage);
         statusMessage.setVisibility(View.VISIBLE);
-
-        if(s.equals("thumb_up")) { statusMessage.setImageResource(R.drawable.thumb_up); }
-        else if(s.equals("level_up")) { statusMessage.setImageResource(R.drawable.level_up); }
-        else if(s.equals("out_of_time")) { statusMessage.setImageResource(R.drawable.out_of_time); }
-        else { statusMessage.setImageResource(R.drawable.thumb_down); }
-
+        switch (s){
+            case "thumb_up": statusMessage.setImageResource(R.drawable.thumb_up); break;
+            case "level_up": statusMessage.setImageResource(R.drawable.level_up); break;
+            case "out_of_time": statusMessage.setImageResource(R.drawable.out_of_time); break;
+            default: statusMessage.setImageResource(R.drawable.thumb_down);
+        }
         //Show the status text only for 1 second
-        new Timer().schedule(new TimerTask() {
+        new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 statusMessage.setVisibility(View.INVISIBLE);
@@ -267,41 +267,41 @@ public class Game extends AppCompatActivity {
         }, 1000);
     }
     private void setButtonsText(String button1, String button2, String button3){
-        final TextView answer1 = (TextView)findViewById(R.id.answer1);
+        final TextView answer1 = findViewById(R.id.answer1);
         answer1.setText(button1);
-        final TextView answer2 = (TextView)findViewById(R.id.answer2);
+        final TextView answer2 = findViewById(R.id.answer2);
         answer2.setText(button2);
-        final TextView answer3 = (TextView)findViewById(R.id.answer3);
+        final TextView answer3 = findViewById(R.id.answer3);
         answer3.setText(button3);
     }
     private String getButtonText(int id){
         String txt = "";
         if(id == 1) {
-            final TextView answer1 = (TextView) findViewById(R.id.answer1);
+            final TextView answer1 = findViewById(R.id.answer1);
             txt = (String) answer1.getText();
         } else if(id == 2){
-            final TextView answer2 = (TextView) findViewById(R.id.answer2);
+            final TextView answer2 = findViewById(R.id.answer2);
             txt = (String) answer2.getText();
         } else if(id == 3){
-            final TextView answer3 = (TextView) findViewById(R.id.answer3);
+            final TextView answer3 = findViewById(R.id.answer3);
             txt = (String) answer3.getText();
         }
         return txt;
     }
 
     // Button animation
-    public void bounceAnimation(View view, Button btn) {
+    public void bounceAnimation(Button btn) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         BounceInterpolator interpolator = new BounceInterpolator(0.2, 20);
         myAnim.setInterpolator(interpolator);
         btn.startAnimation(myAnim);
     }
     // Slide animation
-    public void slideAnimation(final View view, String s) {
+    public void slideAnimation(final View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.slide);
         final Animation myAnim2 = AnimationUtils.loadAnimation(this, R.anim.slide2);
         view.startAnimation(myAnim2);
-        new Timer().schedule(new TimerTask() {
+        new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
                 view.startAnimation(myAnim);

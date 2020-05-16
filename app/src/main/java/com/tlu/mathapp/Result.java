@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "results")
 public class Result {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    int uid;
 
     @ColumnInfo(name = "name")
     public String name;
@@ -16,7 +16,7 @@ public class Result {
     public String score; // Its safer to store numbers as strings in db
 
 
-    public Result(String name, String score) {
+    Result(String name, String score) {
         this.name = name;
         this.score = score;
     }
@@ -25,7 +25,7 @@ public class Result {
         return this.name;
     }
 
-    public String getScore(){
+    String getScore(){
         return this.score;
     }
 

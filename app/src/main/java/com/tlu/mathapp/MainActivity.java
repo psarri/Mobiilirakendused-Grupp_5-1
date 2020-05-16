@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 getSystemService(Context.POWER_SERVICE);
         boolean isScreenOn = false;
         if (pm != null) {
-            isScreenOn = pm.isScreenOn();
+            //isScreenOn = pm.isScreenOn();
         }
 
         if (!isScreenOn) {

@@ -13,31 +13,25 @@ public class HomeWatcher {
     private OnHomePressedListener mListener;
     private InnerRecevier mRecevier;
 
-    public HomeWatcher(Context context) {
+    HomeWatcher(Context context) {
         mContext = context;
         mFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
     }
 
-    public void setOnHomePressedListener(OnHomePressedListener listener) {
+    void setOnHomePressedListener(OnHomePressedListener listener) {
         mListener = listener;
         mRecevier = new InnerRecevier();
     }
 
-    public void startWatch() {
+    void startWatch() {
         if (mRecevier != null) {
             mContext.registerReceiver(mRecevier, mFilter);
         }
     }
 
-    public void stopWatch() {
-        if (mRecevier != null) {
-            mContext.unregisterReceiver(mRecevier);
-        }
-    }
 
     class InnerRecevier extends BroadcastReceiver {
         final String SYSTEM_DIALOG_REASON_KEY = "reason";
-        final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
         final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
         final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
 

@@ -17,21 +17,21 @@ public class LandingPageActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        gameBtn = (Button) findViewById(R.id.play_button);
+        gameBtn =  findViewById(R.id.play_button);
         gameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGame();
-                bounceAnimation(v, gameBtn);
+                bounceAnimation(gameBtn);
             }
         });
 
-        resBtn = (Button) findViewById(R.id.results_button);
+        resBtn = findViewById(R.id.results_button);
         resBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 results();
-                bounceAnimation(v, resBtn);
+                bounceAnimation(resBtn);
             }
         });
     }
@@ -63,7 +63,7 @@ public class LandingPageActivity extends AppCompatActivity{
     }
 
     // Button animation
-    public void bounceAnimation(View view, Button btn) {
+    public void bounceAnimation(Button btn) {
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         BounceInterpolator interpolator = new BounceInterpolator(0.1, 20);
         myAnim.setInterpolator(interpolator);

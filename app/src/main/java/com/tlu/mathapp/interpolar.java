@@ -1,8 +1,8 @@
 package com.tlu.mathapp;
 
 class BounceInterpolator implements android.view.animation.Interpolator {
-    private double mAmplitude = 1;
-    private double mFrequency = 10;
+    private double mAmplitude;
+    private double mFrequency;
 
     BounceInterpolator(double amplitude, double frequency) {
         mAmplitude = amplitude;
