@@ -10,9 +10,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class LandingPageActivity extends AppCompatActivity{
+    private MusicService mServ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Button gameBtn, resBtn;
+        final Button gameBtn, resBtn, musicBtn;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
@@ -34,6 +35,15 @@ public class LandingPageActivity extends AppCompatActivity{
                 bounceAnimation(v, resBtn);
             }
         });
+
+        musicBtn = (Button) findViewById(R.id.music_button);
+        musicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mServ.pauseMusic();
+            }
+        });
+
     }
 
     //Dont let uer go back to game with back button

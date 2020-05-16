@@ -53,6 +53,13 @@
             android:layout_height="wrap_content"
             android:text="Results"
             android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/music_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sound off"
+            android:textSize="30sp" />
     </LinearLayout>
 
 
