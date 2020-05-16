@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Mathty</string>
-    <string name="m2ngima">Mängima</string>
-    <string name="calculation">2+2</string>
+    <string name="calculation">  </string>
     <string name="time">60</string>
     <string name="b1_answer">2</string>
     <string name="b2_answer">2</string>
@@ -12,12 +11,12 @@
     <string name="game_over_score">"Score: "</string>
     <string name="inputButton">SAVE</string>
     <string name="timeNumber">5</string>
-    <string name="go_play">mängima</string>
-    <string name="results">Tulemused</string>
     <string name="game_name">Mathty</string>
-    <string name="play_again">Mängi uuesti</string>
-    <string name="to_homepage">Avalehele</string>
     <string name="results_table_name">Name</string>
     <string name="results_table_score">Score</string>
     <string name="text_view">Textview</string>
+    <string name="play">Play</string>
+    <string name="results_1">Results</string>
+    <string name="play_again">Play again</string>
+    <string name="home">home</string>
 </resources>

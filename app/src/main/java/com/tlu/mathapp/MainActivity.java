@@ -13,6 +13,7 @@ import android.os.PowerManager;
 public class MainActivity extends AppCompatActivity {
 
     public static MusicService mServ;
+    public static boolean mState = true;
     HomeWatcher mHomeWatcher;
 
     @Override
@@ -76,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
 
         if (mServ != null) {
             mServ.resumeMusic();
+            mState = true;
         }
 
     }
@@ -91,13 +94,11 @@ public class MainActivity extends AppCompatActivity {
         PowerManager pm = (PowerManager)
                 getSystemService(Context.POWER_SERVICE);
         boolean isScreenOn = false;
-        if (pm != null) {
-            //isScreenOn = pm.isScreenOn();
-        }
 
         if (!isScreenOn) {
             if (mServ != null) {
                 mServ.pauseMusic();
+                mState = false;
             }
         }
 

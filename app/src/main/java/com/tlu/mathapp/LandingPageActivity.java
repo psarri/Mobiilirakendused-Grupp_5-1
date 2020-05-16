@@ -8,13 +8,17 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import com.tlu.mathapp.MainActivity;
 
 public class LandingPageActivity extends AppCompatActivity{
-
+    boolean mState = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Button gameBtn, resBtn, musicBtn;
+        final Button gameBtn, resBtn;
+        final ImageView musicBtn;
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
@@ -34,15 +38,23 @@ public class LandingPageActivity extends AppCompatActivity{
             public void onClick(View v) {
                 results();
                 bounceAnimation(resBtn);
+                MainActivity.mServ.resumeMusic();
             }
         });
 
-        musicBtn = findViewById(R.id.music_button);
+        musicBtn = findViewById(R.id.tohoh);
         musicBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.mServ != null) {
+                if (MainActivity.mServ != null && mState) {
                     MainActivity.mServ.pauseMusic();
+                    mState = false;
+                    musicBtn.setImageResource(R.drawable.mute);
+                }
+                else if(MainActivity.mServ != null && !mState) {
+                    MainActivity.mServ.resumeMusic();
+                    mState = true;
+                    musicBtn.setImageResource(R.drawable.unmute);
                 }
             }
         });
