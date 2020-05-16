@@ -1,6 +1,6 @@
-#Mathty
+# Mathty
 
-##Grupi liikmed
+## Grupi liikmed
 * **Sander Hanni**
 * **Gertin Pakkonen**
 * **Kristjan Treimann**
@@ -11,7 +11,7 @@
 ## Kirjeldus
 Mathty on matemaatiliste tehete kiiruse peale peast arvutamise rakendus. Mängu eesmärk on testida enda peast arvutamise oskust liitmise, lahutamise ja korrutamis tehete abil. Mängija eesmärk on ära lahendada võimalikult palju tehteid ja saada suurim skoor. Kaasahaarav ja sõltuvust tekitav mäng, mis on sobilik igale vanusegrupile. 
 
-##Platform
+## Platform
 Android Native 
 
 ## Tarkvara nõuded
@@ -27,12 +27,12 @@ Android Native
 * Android SDK Platform-tools 29.0.6
 * Android SDK Tools 26.1.1
 
-##Pildid
+## Pildid
 
-![mobla 1]('./pics/1.jpg')
-![mobla 1]('./pics/2.jpg')
-![mobla 1]('./pics/3.jpg')
-![mobla 1]('./pics/4.jpg')
+![mobla 1]('pics/1.jpg')
+![mobla 1]('pics/2.jpg')
+![mobla 1]('pics/3.jpg')
+![mobla 1]('pics/4.jpg')
 
 ##APK
 [Tõmba alla mathty APK](./apk/mathty.apk)
