@@ -10,8 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.tlu.mathapp.MainActivity;
-
 public class LandingPageActivity extends AppCompatActivity{
     boolean mState = true;
     @Override
