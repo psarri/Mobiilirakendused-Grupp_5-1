@@ -30,6 +30,10 @@ Android Native
 ## APK
 [Tõmba alla mathty APK](./apk/mathty.apk)
 
+## Video
+
+[<img src="https://img.youtube.com/vi/21b6fqwHhJo/maxresdefault.jpg" width="50%">](https://youtu.be/21b6fqwHhJo)
+
 ## Pildid
 
 ![mobla 1](pics/1.jpg)
