@@ -14,7 +14,7 @@ public class LandingPageActivity extends AppCompatActivity{
     boolean mState = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Button gameBtn, resBtn;
+        final Button gameBtn, resBtn, instBtn;
         final ImageView musicBtn;
 
 
@@ -38,6 +38,15 @@ public class LandingPageActivity extends AppCompatActivity{
                 bounceAnimation(resBtn);
             }
         });
+
+        instBtn = findViewById(R.id.instructions_button);
+        instBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                instructions();
+                bounceAnimation(instBtn);
+            }
+        } );
 
         musicBtn = findViewById(R.id.tohoh);
         musicBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +90,12 @@ public class LandingPageActivity extends AppCompatActivity{
     // Results page
     public void results() {
         Intent intent = new Intent(this, ResultsTable.class);
+        startActivity(intent);
+    }
+
+    // Instructions page
+    public void instructions() {
+        Intent intent = new Intent(this, Instructions.class);
         startActivity(intent);
     }
 

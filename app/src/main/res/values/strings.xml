@@ -19,4 +19,9 @@
     <string name="results_1">Results</string>
     <string name="play_again">Play again</string>
     <string name="home">home</string>
+    <string name="instructions">Instructions</string>
+    <string name="inst_text"> 1) Starting the game - in main menu click play 2) To see the results:
+    in main menu click results or after the game ends click results 3) In game you have to click on the right answer
+    4) You will get points for answering the right one 5) When clicking on the wrong answer you will lose a "life"
+    6) When you run out on "lives", the game ends 7) Saving the score - enter your name and click save.</string>
 </resources>
