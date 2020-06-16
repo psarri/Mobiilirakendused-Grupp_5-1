@@ -5,7 +5,7 @@
 * **Gertin Pakkonen**
 * **Kristjan Treimann**
 * **Andri Kaljumäe**
-* *(Petrik Sarri)*
+* **Petrik Sarri**
 * *(Rando Aljaste)*
 
 ## Kirjeldus
@@ -40,5 +40,6 @@ Android Native
 ![mobla 1](pics/2.jpg)
 ![mobla 1](pics/3.jpg)
 ![mobla 1](pics/4.jpg)
+![mobla 1](pics/5.jpg)
 
 
